@@ -120,6 +120,9 @@ func (g *Godeps) Load(pkgs []*Package) error {
 	}
 	for _, pkg := range ps {
 		if pkg.Error.Err != "" {
+			if strings.HasPrefix(pkg.ImportPath, "appengine") {
+				continue
+			}
 			log.Println(pkg.Error.Err)
 			err1 = errors.New("error loading dependencies")
 			continue
